@@ -1,34 +1,44 @@
 package com.mygdx.bird;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class TMTTFD extends ApplicationAdapter {
-    private SpriteBatch batch;
-    private Texture image;
+public class TMTTFD extends Game {
+
+    public SpriteBatch batch, textBatch;
+    public ShapeRenderer shapeRenderer;
+    BitmapFont font;
+    public OrthographicCamera camera, textCamera;
+    public AssetManager manager;
 
     @Override
     public void create() {
+
+        manager = new AssetManager();
         batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
+        shapeRenderer = new ShapeRenderer();
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 800, 480);
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Dogfiles.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.size = 24;
+        font = generator.generateFont(params);
+        generator.dispose();
+
+        setScreen(new GameScreen(this));
     }
 
     @Override
-    public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
-    }
-
+    public void render () {super.render(); }
     @Override
-    public void dispose() {
-        batch.dispose();
-        image.dispose();
-    }
+    public void dispose() { batch.dispose(); }
 }

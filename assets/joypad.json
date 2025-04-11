@@ -1,0 +1,40 @@
+{
+  "buttons": [
+    {
+      "x": 50,
+      "y": 130,
+      "width": 80,
+      "height": 80,
+      "action": "MoveLeft",
+      "image_on": "buttons/left_pressed.png",
+      "image_off": "buttons/left.png"
+    },
+    {
+      "x": 150,
+      "y": 130,
+      "width": 80,
+      "height": 80,
+      "action": "MoveRight",
+      "image_on": "buttons/right_pressed.png",
+      "image_off": "buttons/right.png"
+    },
+    {
+      "x": 100,
+      "y": 210,
+      "width": 80,
+      "height": 80,
+      "action": "MoveDown",
+      "image_on": "buttons/down_pressed.png",
+      "image_off": "buttons/down.png"
+    },
+    {
+      "x": 100,
+      "y": 50,
+      "width": 80,
+      "height": 80,
+      "action": "MoveUp",
+      "image_on": "buttons/up_pressed.png",
+      "image_off": "buttons/up.png"
+    }
+  ]
+}
