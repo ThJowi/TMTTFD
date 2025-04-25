@@ -1,4 +1,4 @@
-package com.mygdx.bird.jsonloaders;
+package com.mygdx.TMTTFD.jsonloaders;
 
 public class CollectableJson
 {

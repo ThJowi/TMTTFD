@@ -1,0 +1,13 @@
+ARCADECLASSIC.TTF
+Level.json
+character/char_idle_down(1).png
+gui/Down_off.png
+gui/Down_on.png
+gui/Left_off.png
+gui/Left_on.png
+gui/Right_off.png
+gui/Right_on.png
+gui/Up_off.png
+gui/Up_on.png
+joypad.json
+tiles/0.png

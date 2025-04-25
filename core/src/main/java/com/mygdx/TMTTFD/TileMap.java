@@ -1,11 +1,11 @@
-package com.mygdx.bird;
+package com.mygdx.TMTTFD;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.bird.jsonloaders.LevelJson;
+import com.mygdx.TMTTFD.jsonloaders.LevelJson;
 
 public class TileMap {
 
@@ -66,16 +66,6 @@ public class TileMap {
     {
 
         batch.begin();
-
-        Texture bgTexture = manager.get("BG.png", Texture.class);
-
-        // Parallax scroll
-        int bgWidth = bgTexture.getWidth();
-        int bgHeight = bgTexture.getHeight();
-        int scrollXPos = 0 - ((scrollX/2) % bgWidth);
-
-        batch.draw(bgTexture, scrollXPos, 0, bgWidth, bgHeight, 0, 0, bgWidth, bgHeight, false, true);
-        batch.draw(bgTexture, scrollXPos + bgWidth, 0, bgWidth, bgHeight, 0, 0, bgWidth, bgHeight, false, true);
 
         // Tile map
         for(int j = 0; j < height; j++)

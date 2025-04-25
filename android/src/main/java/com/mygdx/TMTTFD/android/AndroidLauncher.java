@@ -1,10 +1,10 @@
-package com.mygdx.bird.android;
+package com.mygdx.TMTTFD.android;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.bird.TMTTFD;
+import com.mygdx.TMTTFD.TMTTFD;
 
 /** Launches the Android application. */
 public class AndroidLauncher extends AndroidApplication {

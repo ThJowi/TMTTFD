@@ -14,7 +14,7 @@
  */
 //Note, the above license and copyright applies to this file only.
 
-package com.mygdx.bird.lwjgl3;
+package com.mygdx.TMTTFD.lwjgl3;
 
 import org.lwjgl.system.macosx.LibC;
 

@@ -1,4 +1,4 @@
-package com.mygdx.bird;
+package com.mygdx.TMTTFD;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
@@ -17,6 +17,7 @@ public class LoadingScreen implements Screen {
         AssetManager manager = game.manager;
 
         manager.load("BG.png", Texture.class);
+
         manager.load("tiles/0.png", Texture.class);
 
         // Botones de control
@@ -65,8 +66,8 @@ public class LoadingScreen implements Screen {
             game.shapeRenderer.end();
 
             game.textBatch.begin();
-            game.font.draw(game.textBatch, "CARREGANT...", 120, 340);
-            game.font.draw(game.textBatch, (int) (loadProgress * 100.f) + "%", 360, 160);
+            game.bigFont.draw(game.textBatch, "CARREGANT...", 120, 340);
+            game.mediumFont.draw(game.textBatch, (int) (loadProgress * 100.f) + "%", 360, 160);
             game.textBatch.end();
 
         }
