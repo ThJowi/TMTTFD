@@ -2,7 +2,7 @@ package com.mygdx.TMTTFD;
 
 public class WalkingCharacter extends GameEntity {
 
-    protected float live;
+    protected int lives;
     protected boolean hit;
     protected boolean dead;
 
@@ -10,10 +10,9 @@ public class WalkingCharacter extends GameEntity {
     protected float invulnerabilityTime;
 
 
-
-    public WalkingCharacter(int live, float invulnerabilityTime){
+    public WalkingCharacter(int lives, float invulnerabilityTime){
         super();
-        this.live = live;
+        this.lives = lives;
         hit = false;
         dead = false;
         this.invulnerabilityTime = invulnerabilityTime;
@@ -57,9 +56,9 @@ public class WalkingCharacter extends GameEntity {
 
     public void reciveHit() {
         if (!hit && !dead) {
-            live--;
+            lives--;
             hit = true;
-            if (live <= 0) kill();
+            if (lives <= 0) kill();
         }
     }
 
@@ -76,11 +75,11 @@ public class WalkingCharacter extends GameEntity {
         return dead;
     }
 
-    public float getLive() {
-        return live;
+    public int getLive() {
+        return lives;
     }
 
-    public void setLive(float live) {
-        this.live = live;
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }
