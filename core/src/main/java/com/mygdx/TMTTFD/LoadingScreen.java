@@ -16,8 +16,6 @@ public class LoadingScreen implements Screen {
         this.game = game;
         AssetManager manager = game.manager;
 
-        manager.load("BG.png", Texture.class);
-
         manager.load("tiles/0.png", Texture.class);
 
         // Botones de control
@@ -30,6 +28,18 @@ public class LoadingScreen implements Screen {
         manager.load("gui/Right_off.png", Texture.class);
         manager.load("gui/Right_on.png", Texture.class);
 
+        //Player
+        for (int i = 0; i < 6; i++){
+            manager.load("character/idle/char_idle_up("+ (i+1) + ").png", Texture.class);
+            manager.load("character/idle/char_idle_down("+ (i+1) + ").png", Texture.class);
+            manager.load("character/idle/char_idle_left("+ (i+1) + ").png", Texture.class);
+            manager.load("character/idle/char_idle_right("+ (i+1) + ").png", Texture.class);
+            manager.load("character/run/char_run_up("+ (i+1) + ").png", Texture.class);
+            manager.load("character/run/char_run_left("+ (i+1) + ").png", Texture.class);
+            manager.load("character/run/char_run_right("+ (i+1) + ").png", Texture.class);
+            manager.load("character/run/char_run_down("+ (i+1) + ").png", Texture.class);
+
+        }
         manager.finishLoading();
 
         loadProgress = 0f;

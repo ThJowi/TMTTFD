@@ -18,6 +18,8 @@ public class GameScreen implements Screen {
     Stage stage;
     TileMap tileMap;
 
+    Player player;
+
     public GameScreen(TMTTFD game) {
         this.game = game;
 
@@ -27,6 +29,11 @@ public class GameScreen implements Screen {
         tileMap = new TileMap(game.manager, game.batch);
 
         stage = new Stage();
+        player = new Player(6, game.manager);
+        player.setMap(tileMap);
+        player.setJoypad(joypad);
+        stage.addActor(player);
+
         Viewport viewport = new Viewport() {
         };
         viewport.setCamera(game.camera);

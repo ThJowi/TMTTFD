@@ -20,7 +20,7 @@ public class Player extends WalkingCharacter {
         super(initialLives, 3f);
         this.maxLives = initialLives;
         this.manager = manager;
-        currentFrame = manager.get("character/char_idle_down(1).png", Texture.class);
+        currentFrame = manager.get("character/idle/char_idle_down(1).png", Texture.class);
     }
 
     public void setJoypad(ButtonLayout joypad ){
@@ -42,10 +42,10 @@ public class Player extends WalkingCharacter {
         } else {
 
             String direction = null;
-            if(joypad.isPressed("Up")) {
+            if (joypad.isPressed("Up")) {
                 speed.y = SPEED;
                 direction = "up";
-            } else if (joypad.isPressed("Down")){
+            } else if (joypad.isPressed("Down")) {
                 speed.y = -SPEED;
                 direction = "down";
             } else if (joypad.isPressed("Left")) {
@@ -56,7 +56,7 @@ public class Player extends WalkingCharacter {
                 direction = "right";
             }
 
-            switch (direction){
+            switch (direction) {
                 case "up":
                     animationFrame += 10 * delta;
                     if (animationFrame >= 6.f) animationFrame -= 6.f;
@@ -67,13 +67,24 @@ public class Player extends WalkingCharacter {
                     if (animationFrame >= 6.f) animationFrame -= 6.f;
                     currentFrame = manager.get("charcater/run_down(" + ((int) animationFrame + 1) + ").png", Texture.class);
                     break;
+                case "left":
+                    animationFrame += 10 * delta;
+                    if (animationFrame >= 6.f) animationFrame -= 6.f;
+                    currentFrame = manager.get("charcater/run_left(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    break;
+                case "right":
+                    animationFrame += 10 * delta;
+                    if (animationFrame >= 6.f) animationFrame -= 6.f;
+                    currentFrame = manager.get("charcater/run_right(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    break;
 
             }
 
             // Idle animation (temporaria hasta nuevo movimiento)
-            animationFrame += 10 * delta;
-            if (animationFrame >= 10.f) animationFrame -= 10.f;
-            currentFrame = manager.get("character/char_idle_down(" + (int)(animationFrame + 1) + ").png", Texture.class);
+
+            if (animationFrame >= 6.f) animationFrame -= 10 * delta;
+            else animationFrame += 10 * delta;
+            currentFrame = manager.get("character/char_idle_down(" + (int) (animationFrame + 1) + ").png", Texture.class);
         }
     }
 
