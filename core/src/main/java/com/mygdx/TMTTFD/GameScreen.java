@@ -33,6 +33,8 @@ public class GameScreen implements Screen {
         player.setMap(tileMap);
         player.setJoypad(joypad);
         stage.addActor(player);
+        player.setPosition(400, 240); // Posición visible y centrada
+        player.setSize(64, 64);
 
         Viewport viewport = new Viewport() {
         };
@@ -64,9 +66,21 @@ public class GameScreen implements Screen {
         tileMap.render();
 
         stage.draw();
+
+        joypad.render(game.batch, game.textBatch);
+
+        updateGameLogic(delta);
     }
 
     void updateGameLogic(float delta){
+
+        stage.act(delta);
+
+        tileMap.scrollX = (int) (player.getX() - 400);
+        if (tileMap.scrollX < 0)
+            tileMap.scrollX = 0;
+        if (tileMap.scrollX >= tileMap.width * tileMap.TILE_SIZE - 800)
+            tileMap.scrollX = tileMap.width * tileMap.TILE_SIZE - 800 - 1;
 
     }
 

@@ -1,7 +1,11 @@
 package com.mygdx.TMTTFD;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player extends WalkingCharacter {
 
@@ -11,15 +15,21 @@ public class Player extends WalkingCharacter {
     ButtonLayout joypad;
 
     Texture currentFrame;
+    int animationDirection = 1;
 
     private int maxLives;
     private int healPower = 2;
     float animationFrame = 0;
 
+    String direction;
+    Boolean idle = true;
+
+
     public Player(int initialLives, AssetManager manager) {
         super(initialLives, 3f);
         this.maxLives = initialLives;
         this.manager = manager;
+        direction = "down";
         currentFrame = manager.get("character/idle/char_idle_down(1).png", Texture.class);
     }
 
@@ -39,53 +49,104 @@ public class Player extends WalkingCharacter {
             currentFrame = manager.get("player/Dead (" + frameTexture + ").png", Texture.class);
 
             speed.x = 0f;
+            speed.y = 0f;
         } else {
 
-            String direction = null;
+            idle = true;
+            speed.x = 0f;
+            speed.y = 0f;
+
             if (joypad.isPressed("Up")) {
                 speed.y = SPEED;
                 direction = "up";
+                idle = false;
             } else if (joypad.isPressed("Down")) {
                 speed.y = -SPEED;
                 direction = "down";
+                idle = false;
             } else if (joypad.isPressed("Left")) {
-                speed.x = -SPEED;
-                direction = "left";
-            } else if (joypad.isPressed("Right")) {
                 speed.x = SPEED;
+                direction = "left";
+                idle = false;
+            } else if (joypad.isPressed("Right")) {
+                speed.x = -SPEED;
                 direction = "right";
+                idle = false;
             }
 
             switch (direction) {
                 case "up":
-                    animationFrame += 10 * delta;
-                    if (animationFrame >= 6.f) animationFrame -= 6.f;
-                    currentFrame = manager.get("charcater/run_up(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    if (idle){
+                        if (animationFrame >= 10.f) animationFrame -= 10.f;
+                        else animationFrame += 10 * delta;
+                        currentFrame = manager.get("character/idle/char_idle_up(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                    }
+                    else {
+                        animationFrame += 10 * delta;
+                        if (animationFrame >= 6.f) animationFrame -= 6.f;
+                        currentFrame = manager.get("character/run/char_run_up(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    }
                     break;
                 case "down":
-                    animationFrame += 10 * delta;
-                    if (animationFrame >= 6.f) animationFrame -= 6.f;
-                    currentFrame = manager.get("charcater/run_down(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    if (idle){
+                        if (animationFrame >= 10.f) animationFrame -= 10.f;
+                        else animationFrame += 10 * delta;
+                        currentFrame = manager.get("character/idle/char_idle_down(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                    }
+                    else {
+                        animationFrame += 10 * delta;
+                        if (animationFrame >= 6.f) animationFrame -= 6.f;
+                        currentFrame = manager.get("character/run/char_run_down(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    }
                     break;
                 case "left":
-                    animationFrame += 10 * delta;
-                    if (animationFrame >= 6.f) animationFrame -= 6.f;
-                    currentFrame = manager.get("charcater/run_left(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    if (idle){
+                        if (animationFrame >= 10.f) animationFrame -= 10.f;
+                        else animationFrame += 10 * delta;
+                        currentFrame = manager.get("character/idle/char_idle_left(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                    }
+                    else {
+                        animationFrame += 10 * delta;
+                        if (animationFrame >= 6.f) animationFrame -= 6.f;
+                        currentFrame = manager.get("character/run/char_run_left(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    }
                     break;
                 case "right":
-                    animationFrame += 10 * delta;
-                    if (animationFrame >= 6.f) animationFrame -= 6.f;
-                    currentFrame = manager.get("charcater/run_right(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    if (idle) {
+                        if (animationFrame >= 10.f) animationFrame -= 10.f;
+                        else animationFrame += 10 * delta;
+                        currentFrame = manager.get("character/idle/char_idle_right(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                    }
+                    else {
+                        animationFrame += 10 * delta;
+                        if (animationFrame >= 6.f) animationFrame -= 6.f;
+                        currentFrame = manager.get("character/run/char_run_right(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    }
                     break;
-
             }
-
-            // Idle animation (temporaria hasta nuevo movimiento)
-
-            if (animationFrame >= 6.f) animationFrame -= 10 * delta;
-            else animationFrame += 10 * delta;
-            currentFrame = manager.get("character/char_idle_down(" + (int) (animationFrame + 1) + ").png", Texture.class);
         }
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+
+        if (currentFrame != null) {
+            batch.draw(
+                currentFrame,
+                getX(), getY(),
+                getWidth(), getHeight()
+            );
+        }
+    }
+
+    public void drawDebug(ShapeRenderer shapes) {
+        //super.drawDebug(shapes);
+
+        shapes.begin(ShapeRenderer.ShapeType.Filled);
+        shapes.setColor(Color.NAVY);
+        shapes.rect(getX() - getWidth()*0.5f - map.scrollX, getY() - getHeight()*0.5f, getWidth(), getHeight());
+        shapes.end();
     }
 
     public void handleDeath(){

@@ -71,10 +71,7 @@ public class TileMap {
         for(int j = 0; j < height; j++)
             for(int i = 0; i < width; i++)
             {
-                if(tiles[j][i] != 0)
-                {
-                    batch.draw(manager.get("tiles/"+tiles[j][i]+".png", Texture.class), TILE_SIZE * i - scrollX, TILE_SIZE * j, TILE_SIZE, TILE_SIZE, 0, 0, 128, 128, false, true);
-                }
+                batch.draw(manager.get("tiles/"+tiles[j][i]+".png", Texture.class), TILE_SIZE * i - scrollX, TILE_SIZE * j, TILE_SIZE, TILE_SIZE, 0, 0, 128, 128, false, true);
             }
         batch.end();
     }
@@ -89,56 +86,6 @@ public class TileMap {
         if(mapX >= width) mapX = width - 1;
         if(mapY >= height) mapY = height - 1;
 
-        return tiles[mapY][mapX] != 0 && tiles[mapY][mapX] < 17;
-    }
-
-    int nearestFloor(int x, int y)
-    {
-        int mapX = x / TILE_SIZE;
-        int mapY = y / TILE_SIZE;
-
-        if(mapX < 0) mapX = 0;
-        if(mapY < 0) mapY = 0;
-        if(mapX >= width) mapX = width - 1;
-        if(mapY >= height) mapY = height - 1;
-
-        while(mapY < height && (tiles[mapY][mapX] == 0 || tiles[mapY][mapX] >= 17))
-        {
-            mapY++;
-        }
-
-        if(mapY >= height)
-        {
-            return 9999;
-        }
-        else
-        {
-            return mapY * TILE_SIZE;
-        }
-    }
-
-    int nearestCeiling(int x, int y)
-    {
-        int mapX = x / TILE_SIZE;
-        int mapY = y / TILE_SIZE;
-
-        if(mapX < 0) mapX = 0;
-        if(mapY < 0) mapY = 0;
-        if(mapX >= width) mapX = width - 1;
-        if(mapY >= height) mapY = height - 1;
-
-        while(mapY >= 0 && (tiles[mapY][mapX] == 0 || tiles[mapY][mapX] >= 17))
-        {
-            mapY--;
-        }
-
-        if(mapY < 0)
-        {
-            return -9999;
-        }
-        else
-        {
-            return ((mapY + 1) * TILE_SIZE) - 1;
-        }
+        return tiles[mapY][mapX] != 0 && tiles[mapY][mapX] > 17;
     }
 }

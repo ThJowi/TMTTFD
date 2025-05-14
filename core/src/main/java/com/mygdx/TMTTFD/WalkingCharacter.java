@@ -1,5 +1,8 @@
 package com.mygdx.TMTTFD;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 public class WalkingCharacter extends GameEntity {
 
     protected int lives;
@@ -52,6 +55,16 @@ public class WalkingCharacter extends GameEntity {
         }
 
         super.act(delta);
+    }
+
+    @Override
+    public void drawDebug(ShapeRenderer shapes) {
+        super.drawDebug(shapes);
+
+        shapes.begin(ShapeRenderer.ShapeType.Filled);
+        shapes.setColor(Color.NAVY);
+        shapes.rect(getX() - getWidth()*0.5f - map.scrollX, getY() - getHeight()*0.5f, getWidth(), getHeight());
+        shapes.end();
     }
 
     public void reciveHit() {

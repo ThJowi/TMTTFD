@@ -1,40 +1,40 @@
 {
   "buttons": [
     {
-      "x": 50,
-      "y": 130,
-      "width": 80,
-      "height": 80,
-      "action": "MoveLeft",
-      "image_on": "buttons/left_pressed.png",
-      "image_off": "buttons/left.png"
+      "x": 60,
+      "y": 90,
+      "width": 40,
+      "height": 40,
+      "action": "Left",
+      "image_on": "gui/Left_on.png",
+      "image_off": "gui/Left_off.png"
     },
     {
-      "x": 150,
-      "y": 130,
-      "width": 80,
-      "height": 80,
-      "action": "MoveRight",
-      "image_on": "buttons/right_pressed.png",
-      "image_off": "buttons/right.png"
+      "x": 140,
+      "y": 90,
+      "width": 40,
+      "height": 40,
+      "action": "Right",
+      "image_on": "gui/Right_on.png",
+      "image_off": "gui/Right_off.png"
     },
     {
       "x": 100,
-      "y": 210,
-      "width": 80,
-      "height": 80,
-      "action": "MoveDown",
-      "image_on": "buttons/down_pressed.png",
-      "image_off": "buttons/down.png"
+      "y": 130,
+      "width": 40,
+      "height": 40,
+      "action": "Down",
+      "image_on": "gui/Down_off.png",
+      "image_off": "gui/Down_off.png"
     },
     {
       "x": 100,
       "y": 50,
-      "width": 80,
-      "height": 80,
-      "action": "MoveUp",
-      "image_on": "buttons/up_pressed.png",
-      "image_off": "buttons/up.png"
+      "width": 40,
+      "height": 40,
+      "action": "Up",
+      "image_on": "gui/Up_on.png",
+      "image_off": "gui/Up_off.png"
     }
   ]
 }

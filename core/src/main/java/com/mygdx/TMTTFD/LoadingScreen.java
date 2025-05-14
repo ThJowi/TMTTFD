@@ -40,7 +40,6 @@ public class LoadingScreen implements Screen {
             manager.load("character/run/char_run_down("+ (i+1) + ").png", Texture.class);
 
         }
-        manager.finishLoading();
 
         loadProgress = 0f;
     }

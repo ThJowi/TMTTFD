@@ -152,7 +152,6 @@ public class ButtonLayout implements InputProcessor {
         spriteBatch.end();
 
         // Button texts
-        textBatch.begin();
         for(String i:buttons.keySet())
         {
             Button b = buttons.get(i);
@@ -163,7 +162,6 @@ public class ButtonLayout implements InputProcessor {
                 font.draw(textBatch, glyphLayout, b.rect.x + (b.rect.width - glyphLayout.width) / 2f, 480 - (b.rect.y + (b.rect.height - glyphLayout.height) / 2f));
             }
         }
-        textBatch.end();
     }
 
     @Override
