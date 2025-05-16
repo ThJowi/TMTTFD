@@ -9,14 +9,14 @@ import com.mygdx.TMTTFD.jsonloaders.LevelJson;
 
 public class TileMap {
 
-    public static final int TILE_SIZE = 64;
+    public static final int TILE_SIZE = 48;
     int width;
     int height;
     byte tiles[][];
     AssetManager manager;
     SpriteBatch batch;
 
-    public int scrollX;
+    public int scrollX, scrollY;
 
     public TileMap(AssetManager manager, SpriteBatch batch)
     {
@@ -44,24 +44,6 @@ public class TileMap {
         }
     }
 
-    // Old render with color squares
-    public void render(ShapeRenderer shapeRenderer) {
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        for(int j = 0; j < height; j++)
-            for(int i = 0; i < width; i++)
-            {
-                if(tiles[j][i] != 0)
-                {
-                    shapeRenderer.setColor(Color.OLIVE);
-                    shapeRenderer.rect(TILE_SIZE * i - scrollX, TILE_SIZE * j, TILE_SIZE, TILE_SIZE);
-                    shapeRenderer.setColor(Color.FIREBRICK);
-                    shapeRenderer.rect(TILE_SIZE * i + 6 - scrollX, TILE_SIZE * j + 6, TILE_SIZE - 12, TILE_SIZE - 12);
-                }
-            }
-        shapeRenderer.end();
-    }
-
     public void render()
     {
 
@@ -71,7 +53,12 @@ public class TileMap {
         for(int j = 0; j < height; j++)
             for(int i = 0; i < width; i++)
             {
-                batch.draw(manager.get("tiles/"+tiles[j][i]+".png", Texture.class), TILE_SIZE * i - scrollX, TILE_SIZE * j, TILE_SIZE, TILE_SIZE, 0, 0, 128, 128, false, true);
+                batch.draw(manager.get("tiles/"+tiles[j][i]+".png", Texture.class),
+                    TILE_SIZE * i - scrollX,
+                    TILE_SIZE * j - scrollY,
+                    TILE_SIZE, TILE_SIZE,
+                    0, 0, 128, 128,
+                    false, true);
             }
         batch.end();
     }

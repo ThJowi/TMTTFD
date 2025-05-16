@@ -9,13 +9,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player extends WalkingCharacter {
 
-    static final float SPEED = 240f;
+    static final float SPEED = 120f;
 
     AssetManager manager;
     ButtonLayout joypad;
 
     Texture currentFrame;
-    int animationDirection = 1;
 
     private int maxLives;
     private int healPower = 2;
@@ -29,7 +28,7 @@ public class Player extends WalkingCharacter {
         super(initialLives, 3f);
         this.maxLives = initialLives;
         this.manager = manager;
-        direction = "down";
+        direction = "up";
         currentFrame = manager.get("character/idle/char_idle_down(1).png", Texture.class);
     }
 
@@ -57,19 +56,19 @@ public class Player extends WalkingCharacter {
             speed.y = 0f;
 
             if (joypad.isPressed("Up")) {
-                speed.y = SPEED;
+                speed.y = -SPEED;
                 direction = "up";
                 idle = false;
             } else if (joypad.isPressed("Down")) {
-                speed.y = -SPEED;
+                speed.y = SPEED;
                 direction = "down";
                 idle = false;
             } else if (joypad.isPressed("Left")) {
-                speed.x = SPEED;
+                speed.x = -SPEED;
                 direction = "left";
                 idle = false;
             } else if (joypad.isPressed("Right")) {
-                speed.x = -SPEED;
+                speed.x = SPEED;
                 direction = "right";
                 idle = false;
             }
@@ -79,24 +78,24 @@ public class Player extends WalkingCharacter {
                     if (idle){
                         if (animationFrame >= 10.f) animationFrame -= 10.f;
                         else animationFrame += 10 * delta;
-                        currentFrame = manager.get("character/idle/char_idle_up(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
-                    }
-                    else {
-                        animationFrame += 10 * delta;
-                        if (animationFrame >= 6.f) animationFrame -= 6.f;
-                        currentFrame = manager.get("character/run/char_run_up(" + ((int) animationFrame + 1) + ").png", Texture.class);
-                    }
-                    break;
-                case "down":
-                    if (idle){
-                        if (animationFrame >= 10.f) animationFrame -= 10.f;
-                        else animationFrame += 10 * delta;
                         currentFrame = manager.get("character/idle/char_idle_down(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
                     }
                     else {
                         animationFrame += 10 * delta;
                         if (animationFrame >= 6.f) animationFrame -= 6.f;
                         currentFrame = manager.get("character/run/char_run_down(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                    }
+                    break;
+                case "down":
+                    if (idle){
+                        if (animationFrame >= 10.f) animationFrame -= 10.f;
+                        else animationFrame += 10 * delta;
+                        currentFrame = manager.get("character/idle/char_idle_up(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                    }
+                    else {
+                        animationFrame += 10 * delta;
+                        if (animationFrame >= 6.f) animationFrame -= 6.f;
+                        currentFrame = manager.get("character/run/char_run_up(" + ((int) animationFrame + 1) + ").png", Texture.class);
                     }
                     break;
                 case "left":
@@ -134,7 +133,7 @@ public class Player extends WalkingCharacter {
         if (currentFrame != null) {
             batch.draw(
                 currentFrame,
-                getX(), getY(),
+                getX() - getWidth()/2f- map.scrollX, getY() -getHeight()/2f - map.scrollY,
                 getWidth(), getHeight()
             );
         }
@@ -145,7 +144,7 @@ public class Player extends WalkingCharacter {
 
         shapes.begin(ShapeRenderer.ShapeType.Filled);
         shapes.setColor(Color.NAVY);
-        shapes.rect(getX() - getWidth()*0.5f - map.scrollX, getY() - getHeight()*0.5f, getWidth(), getHeight());
+        shapes.rect(getX() - getWidth()*0.5f - map.scrollX, getY() - getHeight()*0.5f - map.scrollY, getWidth(), getHeight());
         shapes.end();
     }
 

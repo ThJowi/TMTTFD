@@ -123,20 +123,6 @@ public class ButtonLayout implements InputProcessor {
 
     }
 
-    public void render(ShapeRenderer shapeRenderer)
-    {
-        shapeRenderer.setAutoShapeType(true);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        for(String i:buttons.keySet())
-        {
-            Button b = buttons.get(i);
-            shapeRenderer.setColor(b.pressed ? Color.YELLOW : Color.BLACK);
-            shapeRenderer.ellipse(b.rect.x, b.rect.y, b.rect.width, b.rect.height, 2);
-            shapeRenderer.rect(b.rect.x, b.rect.y, b.rect.width, b.rect.height);
-        }
-        shapeRenderer.end();
-    }
 
     public void render(SpriteBatch spriteBatch, SpriteBatch textBatch)
     {

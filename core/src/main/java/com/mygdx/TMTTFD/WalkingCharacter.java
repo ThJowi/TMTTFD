@@ -63,7 +63,7 @@ public class WalkingCharacter extends GameEntity {
 
         shapes.begin(ShapeRenderer.ShapeType.Filled);
         shapes.setColor(Color.NAVY);
-        shapes.rect(getX() - getWidth()*0.5f - map.scrollX, getY() - getHeight()*0.5f, getWidth(), getHeight());
+        shapes.rect(getX() - getWidth()*0.5f - map.scrollX, getY() - getHeight()*0.5f - map.scrollY, getWidth(), getHeight());
         shapes.end();
     }
 
