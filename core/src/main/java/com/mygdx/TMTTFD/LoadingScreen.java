@@ -17,6 +17,7 @@ public class LoadingScreen implements Screen {
         AssetManager manager = game.manager;
 
         manager.load("tiles/0.png", Texture.class);
+        manager.load("tiles/1.png", Texture.class);
 
         // Botones de control
         manager.load("gui/Up_off.png", Texture.class);
@@ -27,6 +28,8 @@ public class LoadingScreen implements Screen {
         manager.load("gui/Left_on.png", Texture.class);
         manager.load("gui/Right_off.png", Texture.class);
         manager.load("gui/Right_on.png", Texture.class);
+        manager.load("gui/A_off.png", Texture.class);
+        manager.load("gui/A_on.png", Texture.class);
 
         //Player
         for (int i = 0; i < 6; i++){
@@ -38,6 +41,10 @@ public class LoadingScreen implements Screen {
             manager.load("character/run/char_run_left("+ (i+1) + ").png", Texture.class);
             manager.load("character/run/char_run_right("+ (i+1) + ").png", Texture.class);
             manager.load("character/run/char_run_down("+ (i+1) + ").png", Texture.class);
+            manager.load("character/attack/sword_up("+ (i+1) + ").png", Texture.class);
+            manager.load("character/attack/sword_left("+ (i+1) + ").png", Texture.class);
+            manager.load("character/attack/sword_right("+ (i+1) + ").png", Texture.class);
+            manager.load("character/attack/sword_down("+ (i+1) + ").png", Texture.class);
 
         }
 

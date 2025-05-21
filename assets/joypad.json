@@ -35,6 +35,15 @@
       "action": "Up",
       "image_on": "gui/Up_on.png",
       "image_off": "gui/Up_off.png"
+    },
+    {
+      "x": 600,
+      "y": 90,
+      "width": 50,
+      "height": 50,
+      "action": "Attack",
+      "image_on": "gui/A_on.png",
+      "image_off": "gui/A_off.png"
     }
   ]
 }

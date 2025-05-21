@@ -22,7 +22,7 @@ public class Player extends WalkingCharacter {
 
     String direction;
     Boolean idle = true;
-
+    Boolean attack = false;
 
     public Player(int initialLives, AssetManager manager) {
         super(initialLives, 3f);
@@ -49,7 +49,26 @@ public class Player extends WalkingCharacter {
 
             speed.x = 0f;
             speed.y = 0f;
-        } else {
+        } else if (attack) {
+            animationFrame += 10 * delta;
+            if (animationFrame >= 6.f) {
+                animationFrame -= 6.f;
+                attack = false;
+            }
+            String aDirection = "";
+            switch (direction){
+                case "up":
+                    aDirection = "down";
+                    break;
+                case "down":
+                    aDirection = "up";
+                    break;
+                default:
+                    aDirection = direction;
+            }
+            currentFrame = manager.get("character/attack/sword_" + aDirection + "(" + ((int) animationFrame + 1) + ").png", Texture.class);
+        }
+        else {
 
             idle = true;
             speed.x = 0f;
@@ -71,7 +90,14 @@ public class Player extends WalkingCharacter {
                 speed.x = SPEED;
                 direction = "right";
                 idle = false;
+            } else if (joypad.isPressed("Attack")){
+                speed.x = 0;
+                speed.y = 0;
+                idle = false;
+                attack = true;
+                animationFrame = 0f;
             }
+
 
             switch (direction) {
                 case "up":
@@ -79,10 +105,10 @@ public class Player extends WalkingCharacter {
                         if (animationFrame >= 10.f) animationFrame -= 10.f;
                         else animationFrame += 10 * delta;
                         currentFrame = manager.get("character/idle/char_idle_down(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
-                    }
-                    else {
+                    } else {
                         animationFrame += 10 * delta;
-                        if (animationFrame >= 6.f) animationFrame -= 6.f;
+                        if (animationFrame >= 6.f){ animationFrame -= 6.f;
+                        }
                         currentFrame = manager.get("character/run/char_run_down(" + ((int) animationFrame + 1) + ").png", Texture.class);
                     }
                     break;

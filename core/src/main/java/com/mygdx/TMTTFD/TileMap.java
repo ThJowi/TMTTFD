@@ -73,6 +73,6 @@ public class TileMap {
         if(mapX >= width) mapX = width - 1;
         if(mapY >= height) mapY = height - 1;
 
-        return tiles[mapY][mapX] != 0 && tiles[mapY][mapX] > 17;
+        return tiles[mapY][mapX] != 0 && tiles[mapY][mapX] > 0;
     }
 }

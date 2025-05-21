@@ -34,8 +34,6 @@ public class GameScreen implements Screen {
         player.setJoypad(joypad);
         stage.addActor(player);
         player.setPosition(400, 240); // Posición visible y centrada
-        player.setSize(48, 48);
-
         Viewport viewport = new Viewport() {
         };
         viewport.setCamera(game.camera);
@@ -62,6 +60,11 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(game.camera.combined);
         game.shapeRenderer.setProjectionMatrix(game.camera.combined);
         ScreenUtils.clear(Color.SKY);
+
+        if (player.attack)
+            player.setSize(96, 96);
+        else
+            player.setSize(48, 48);
 
         tileMap.render();
 
