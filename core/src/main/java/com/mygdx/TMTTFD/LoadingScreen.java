@@ -44,7 +44,8 @@ public class LoadingScreen implements Screen {
             manager.load("character/attack/sword_up("+ (i+1) + ").png", Texture.class);
             manager.load("character/attack/sword_left("+ (i+1) + ").png", Texture.class);
             manager.load("character/attack/sword_right("+ (i+1) + ").png", Texture.class);
-            manager.load("character/attack/sword_down("+ (i+1) + ").png", Texture.class);
+            manager.load("character/attack/sword_down("+ (i+1) + ").png", Texture.class);;
+            manager.load("Enemy/Slime("+ (i+1) + ").png", Texture.class);
 
         }
 

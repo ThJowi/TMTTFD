@@ -25,7 +25,7 @@ public class Player extends WalkingCharacter {
     Boolean attack = false;
 
     public Player(int initialLives, AssetManager manager) {
-        super(initialLives, 3f);
+        super(initialLives, 1.5f);
         this.maxLives = initialLives;
         this.manager = manager;
         direction = "up";
@@ -154,6 +154,7 @@ public class Player extends WalkingCharacter {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        if (!visible) return;
         super.draw(batch, parentAlpha);
 
         if (currentFrame != null) {

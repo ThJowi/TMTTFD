@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -19,6 +20,7 @@ public class GameScreen implements Screen {
     TileMap tileMap;
 
     Player player;
+    Slime slime;
 
     public GameScreen(TMTTFD game) {
         this.game = game;
@@ -34,6 +36,10 @@ public class GameScreen implements Screen {
         player.setJoypad(joypad);
         stage.addActor(player);
         player.setPosition(400, 240); // Posición visible y centrada
+        slime = new Slime(player, 6, 0f, game.manager);
+        slime.setMap(tileMap);
+        slime.setPosition(400, 400);
+        slime.setSize(48, 48);
         Viewport viewport = new Viewport() {
         };
         viewport.setCamera(game.camera);
@@ -70,6 +76,10 @@ public class GameScreen implements Screen {
 
         stage.draw();
 
+        slime.act(delta);
+        game.batch.begin();
+        slime.draw(game.batch, 1f);
+        game.batch.end();
         joypad.render(game.batch, game.textBatch);
 
         updateGameLogic(delta);
@@ -89,6 +99,16 @@ public class GameScreen implements Screen {
             tileMap.scrollX = tileMap.width * tileMap.TILE_SIZE - 800 - 1;
         if (tileMap.scrollY >= tileMap.height * tileMap.TILE_SIZE - 480)
             tileMap.scrollY = tileMap.height * tileMap.TILE_SIZE - 480 - 1;
+
+        if (!player.isDead() || !slime.isDead()){
+            Rectangle rect_player = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+            Rectangle rect_enemy = new Rectangle(slime.getX(), slime.getY(), slime.getWidth(), slime.getHeight());
+
+            if (rect_player.overlaps(rect_enemy)){
+                player.reciveHit();
+            }
+
+        }
     }
 
     @Override

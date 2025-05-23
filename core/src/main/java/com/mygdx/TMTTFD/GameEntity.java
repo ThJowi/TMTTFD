@@ -18,7 +18,7 @@ public class GameEntity extends Actor
     public void act(float delta) {
         super.act(delta);
 
-        moveBy(delta*speed.x, delta* speed.y);
+        moveBy(delta*speed.x, delta*speed.y);
     }
 
     public Vector2 getSpeed() {

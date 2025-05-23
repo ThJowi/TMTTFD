@@ -1,4 +1,10 @@
 ARCADECLASSIC.TTF
+Enemy/Slime(1).png
+Enemy/Slime(2).png
+Enemy/Slime(3).png
+Enemy/Slime(4).png
+Enemy/Slime(5).png
+Enemy/Slime(6).png
 Level.json
 character/attack/sword_down(1).png
 character/attack/sword_down(2).png

@@ -12,6 +12,9 @@ public class WalkingCharacter extends GameEntity {
     protected float timer;
     protected float invulnerabilityTime;
 
+    protected boolean visible;
+    protected  float blinkTimer;
+    protected static final float BLINK_INTERVAL = 0.1f;
 
     public WalkingCharacter(int lives, float invulnerabilityTime){
         super();
@@ -19,7 +22,7 @@ public class WalkingCharacter extends GameEntity {
         hit = false;
         dead = false;
         this.invulnerabilityTime = invulnerabilityTime;
-
+        visible = true;
     }
 
     @Override
@@ -48,9 +51,16 @@ public class WalkingCharacter extends GameEntity {
 
         if (hit){
            timer += delta;
+           blinkTimer += delta;
+
+           if (blinkTimer >= BLINK_INTERVAL){
+               visible = !visible;
+               blinkTimer = 0f;
+           }
            if (timer >= invulnerabilityTime){
                hit = false;
                timer = 0;
+               visible = true;
            }
         }
 
