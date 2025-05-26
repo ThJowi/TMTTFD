@@ -13,7 +13,6 @@ public class Slime extends WalkingCharacter{
 
     private Texture currentFrame;
     private AssetManager manager;
-    float animationFrame = 0;
 
     public Slime(Player target, int lives, float invulnerabilityTime, AssetManager manager) {
         super(lives, invulnerabilityTime);
@@ -24,6 +23,17 @@ public class Slime extends WalkingCharacter{
 
     @Override
     public void act(float delta){
+
+        if (dead){
+
+            animationFrame += 10f * delta;
+            if (animationFrame > 9)
+                animationFrame = 9;
+            currentFrame = manager.get("Enemy/death("+ (int)(animationFrame+1) + ").png", Texture.class);
+
+            speed.x = 0f;
+            speed.y = 0f;
+        }
         super.act(delta);
         float distanceY = target.getY() - getY();
        float distanceX = target.getX() - getX();

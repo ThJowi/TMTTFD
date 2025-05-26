@@ -38,7 +38,6 @@ public class LoadingScreen implements Screen {
         manager.load("gui/health_hud.png", Texture.class);
 
 
-        //Player
         for (int i = 0; i < 6; i++){
             manager.load("character/idle/char_idle_up("+ (i+1) + ").png", Texture.class);
             manager.load("character/idle/char_idle_down("+ (i+1) + ").png", Texture.class);
@@ -51,10 +50,18 @@ public class LoadingScreen implements Screen {
             manager.load("character/attack/sword_up("+ (i+1) + ").png", Texture.class);
             manager.load("character/attack/sword_left("+ (i+1) + ").png", Texture.class);
             manager.load("character/attack/sword_right("+ (i+1) + ").png", Texture.class);
-            manager.load("character/attack/sword_down("+ (i+1) + ").png", Texture.class);;
+            manager.load("character/attack/sword_down("+ (i+1) + ").png", Texture.class);
             manager.load("Enemy/Slime("+ (i+1) + ").png", Texture.class);
-
         }
+
+        for (int i = 0; i < 10; i++){
+            manager.load("character/death/death("+ (i+1) + ").png", Texture.class);
+        }
+
+        for (int i = 0; i < 8; i++){
+            manager.load("Enemy/death("+ (i+1) + ").png", Texture.class);
+        }
+
 
         loadProgress = 0f;
     }

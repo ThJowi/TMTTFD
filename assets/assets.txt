@@ -5,6 +5,14 @@ Enemy/Slime(3).png
 Enemy/Slime(4).png
 Enemy/Slime(5).png
 Enemy/Slime(6).png
+Enemy/death(1).png
+Enemy/death(2).png
+Enemy/death(3).png
+Enemy/death(4).png
+Enemy/death(5).png
+Enemy/death(6).png
+Enemy/death(7).png
+Enemy/death(8).png
 Level.json
 character/attack/sword_down(1).png
 character/attack/sword_down(2).png
@@ -30,6 +38,16 @@ character/attack/sword_up(3).png
 character/attack/sword_up(4).png
 character/attack/sword_up(5).png
 character/attack/sword_up(6).png
+character/death/death(1).png
+character/death/death(10).png
+character/death/death(2).png
+character/death/death(3).png
+character/death/death(4).png
+character/death/death(5).png
+character/death/death(6).png
+character/death/death(7).png
+character/death/death(8).png
+character/death/death(9).png
 character/idle/char_idle_down(1).png
 character/idle/char_idle_down(2).png
 character/idle/char_idle_down(3).png
@@ -293,3 +311,4 @@ uncompleted/Top_Down_Adventure_Pack_v.1.0/Tiles_(animated)/Overworld/water_tile_
 uncompleted/Top_Down_Adventure_Pack_v.1.0/Tiles_(animated)/Overworld/water_tile_anim_strip_8.png
 uncompleted/Top_Down_Adventure_Pack_v.1.0/Tiles_(animated)/Overworld/waterplant_tile_anim.gif
 uncompleted/Top_Down_Adventure_Pack_v.1.0/Tiles_(animated)/Overworld/waterplant_tile_anim_strip_8.png
+winmenu.json

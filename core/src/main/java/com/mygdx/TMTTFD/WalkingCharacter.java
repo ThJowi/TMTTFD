@@ -10,6 +10,8 @@ public class WalkingCharacter extends GameEntity {
     protected boolean hit;
     protected boolean dead;
 
+    protected float animationFrame = 0f;
+
     protected float timer;
     protected float invulnerabilityTime;
 

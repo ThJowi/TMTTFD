@@ -24,6 +24,9 @@ public class GameScreen implements Screen {
     Player player;
     Slime slime;
 
+    final static float END_TIME = 12f;
+    float timer = 0f;
+
     public GameScreen(TMTTFD game) {
         this.game = game;
 
@@ -40,7 +43,7 @@ public class GameScreen implements Screen {
         player.setPosition(400, 240); // Posición visible y centrada
         slime = new Slime(player, 6, 0f, game.manager);
         slime.setMap(tileMap);
-        slime.setPosition(400, 400);
+        slime.setPosition(400, 700);
         slime.setSize(48, 48);
         Viewport viewport = new Viewport() {
         };
@@ -109,19 +112,28 @@ public class GameScreen implements Screen {
         if (tileMap.scrollY >= tileMap.height * tileMap.TILE_SIZE - 480)
             tileMap.scrollY = tileMap.height * tileMap.TILE_SIZE - 480 - 1;
 
-        if (!player.isDead() || !slime.isDead()){
-            Rectangle rect_player = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
-            Rectangle rect_enemy = new Rectangle(slime.getX(), slime.getY(), slime.getWidth(), slime.getHeight());
 
-            if (rect_player.overlaps(rect_enemy) && !player.attack)
-                player.reciveHit(slime.getX(), slime.getY());
-            if (player.attack && rect_player.overlaps(rect_enemy))
-                slime.reciveHit(player.getX(), player.getY());
+        Rectangle rect_player = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
+        Rectangle rect_enemy = new Rectangle(slime.getX(), slime.getY(), slime.getWidth(), slime.getHeight());
 
+        if (rect_player.overlaps(rect_enemy) && !player.attack)
+            player.reciveHit(slime.getX(), slime.getY());
+        if (player.attack && rect_player.overlaps(rect_enemy))
+            slime.reciveHit(player.getX(), player.getY());
 
-        }else if (player.isDead()){
-
+        if (player.isDead()){
+            slime.speed.set(0,0);
+            timer += delta * 10;
+            if (timer > END_TIME){
+                game.setScreen(new MainMenuScreen(game));
+                this.dispose();
+            }
         }else if (slime.isDead()){
+            timer += delta * 10;
+            if (timer > END_TIME) {
+                game.setScreen(new WinScreen(game));
+                this.dispose();
+            }
 
         }
     }

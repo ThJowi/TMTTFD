@@ -17,7 +17,6 @@ public class Player extends WalkingCharacter {
 
     private int maxLives;
     private int healPower = 2;
-    float animationFrame = 0;
 
     String direction;
     boolean idle = true;
@@ -42,12 +41,10 @@ public class Player extends WalkingCharacter {
     public void act(float delta) {
         super.act(delta);
         if (dead) {
-            // Death animation
             animationFrame += 10f * delta;
-            int frameTexture = (int) animationFrame + 1;
-            if (frameTexture > 10)
-                frameTexture = 10;
-            currentFrame = manager.get("player/Dead (" + frameTexture + ").png", Texture.class);
+            if (animationFrame > 9)
+                animationFrame = 9;
+            currentFrame = manager.get("character/death/death("+ (int)(animationFrame+1) + ").png", Texture.class);
 
             speed.x = 0f;
             speed.y = 0f;
@@ -109,55 +106,56 @@ public class Player extends WalkingCharacter {
                 }
             }
 
-        switch (direction) {
-                case "up":
-                    if (idle){
-                        if (animationFrame >= 10.f) animationFrame -= 10.f;
-                        else animationFrame += 10 * delta;
-                        currentFrame = manager.get("character/idle/char_idle_down(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
-                    } else {
-                        animationFrame += 10 * delta;
-                        if (animationFrame >= 6.f){ animationFrame -= 6.f;
+
+            switch (direction) {
+                    case "up":
+                        if (idle){
+                            if (animationFrame >= 10.f) animationFrame -= 10.f;
+                            else animationFrame += 10 * delta;
+                            currentFrame = manager.get("character/idle/char_idle_down(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                        } else {
+                            animationFrame += 10 * delta;
+                            if (animationFrame >= 6.f){ animationFrame -= 6.f;
+                            }
+                            currentFrame = manager.get("character/run/char_run_down(" + ((int) animationFrame + 1) + ").png", Texture.class);
                         }
-                        currentFrame = manager.get("character/run/char_run_down(" + ((int) animationFrame + 1) + ").png", Texture.class);
-                    }
-                    break;
-                case "down":
-                    if (idle){
-                        if (animationFrame >= 10.f) animationFrame -= 10.f;
-                        else animationFrame += 10 * delta;
-                        currentFrame = manager.get("character/idle/char_idle_up(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
-                    }
-                    else {
-                        animationFrame += 10 * delta;
-                        if (animationFrame >= 6.f) animationFrame -= 6.f;
-                        currentFrame = manager.get("character/run/char_run_up(" + ((int) animationFrame + 1) + ").png", Texture.class);
-                    }
-                    break;
-                case "left":
-                    if (idle){
-                        if (animationFrame >= 10.f) animationFrame -= 10.f;
-                        else animationFrame += 10 * delta;
-                        currentFrame = manager.get("character/idle/char_idle_left(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
-                    }
-                    else {
-                        animationFrame += 10 * delta;
-                        if (animationFrame >= 6.f) animationFrame -= 6.f;
-                        currentFrame = manager.get("character/run/char_run_left(" + ((int) animationFrame + 1) + ").png", Texture.class);
-                    }
-                    break;
-                case "right":
-                    if (idle) {
-                        if (animationFrame >= 10.f) animationFrame -= 10.f;
-                        else animationFrame += 10 * delta;
-                        currentFrame = manager.get("character/idle/char_idle_right(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
-                    }
-                    else {
-                        animationFrame += 10 * delta;
-                        if (animationFrame >= 6.f) animationFrame -= 6.f;
-                        currentFrame = manager.get("character/run/char_run_right(" + ((int) animationFrame + 1) + ").png", Texture.class);
-                    }
-                    break;
+                        break;
+                    case "down":
+                        if (idle){
+                            if (animationFrame >= 10.f) animationFrame -= 10.f;
+                            else animationFrame += 10 * delta;
+                            currentFrame = manager.get("character/idle/char_idle_up(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                        }
+                        else {
+                            animationFrame += 10 * delta;
+                            if (animationFrame >= 6.f) animationFrame -= 6.f;
+                            currentFrame = manager.get("character/run/char_run_up(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                        }
+                        break;
+                    case "left":
+                        if (idle){
+                            if (animationFrame >= 10.f) animationFrame -= 10.f;
+                            else animationFrame += 10 * delta;
+                            currentFrame = manager.get("character/idle/char_idle_left(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                        }
+                        else {
+                            animationFrame += 10 * delta;
+                            if (animationFrame >= 6.f) animationFrame -= 6.f;
+                            currentFrame = manager.get("character/run/char_run_left(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                        }
+                        break;
+                    case "right":
+                        if (idle) {
+                            if (animationFrame >= 10.f) animationFrame -= 10.f;
+                            else animationFrame += 10 * delta;
+                            currentFrame = manager.get("character/idle/char_idle_right(" + (int) (animationFrame/2 + 1) + ").png", Texture.class);
+                        }
+                        else {
+                            animationFrame += 10 * delta;
+                            if (animationFrame >= 6.f) animationFrame -= 6.f;
+                            currentFrame = manager.get("character/run/char_run_right(" + ((int) animationFrame + 1) + ").png", Texture.class);
+                        }
+                        break;
             }
         }
     }

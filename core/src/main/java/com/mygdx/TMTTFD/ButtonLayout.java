@@ -138,6 +138,7 @@ public class ButtonLayout implements InputProcessor {
         spriteBatch.end();
 
         // Button texts
+        textBatch.begin();
         for(String i:buttons.keySet())
         {
             Button b = buttons.get(i);
@@ -145,9 +146,12 @@ public class ButtonLayout implements InputProcessor {
             if(b.text != null) {
                 GlyphLayout glyphLayout = new GlyphLayout();
                 glyphLayout.setText(font, b.text);
-                font.draw(textBatch, glyphLayout, b.rect.x + (b.rect.width - glyphLayout.width) / 2f, 480 - (b.rect.y + (b.rect.height - glyphLayout.height) / 2f));
-            }
+                float textX = b.rect.x + (b.rect.width - glyphLayout.width) / 2f;
+                float textY = b.rect.y + (b.rect.height + glyphLayout.height) / 2f;
+
+                font.draw(textBatch, glyphLayout, textX, textY);}
         }
+        textBatch.end();
     }
 
     @Override

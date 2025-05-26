@@ -3,17 +3,18 @@ package com.mygdx.TMTTFD;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 
-public class MainMenuScreen implements Screen {
+public class WinScreen implements Screen {
 
     TMTTFD game;
-    ButtonLayout mainMenu;
+    ButtonLayout winMenu;
 
-    public MainMenuScreen(TMTTFD game){
+    public WinScreen(TMTTFD game){
         this.game = game;
 
-        mainMenu = new ButtonLayout(game.camera, game.manager, game.mediumFont);
-        mainMenu.loadFromJson("mainmenu.json");
+        winMenu = new ButtonLayout(game.camera, game.manager, game.mediumFont);
+        winMenu.loadFromJson("winmenu.json");
     }
+
     @Override
     public void show() {
 
@@ -31,17 +32,20 @@ public class MainMenuScreen implements Screen {
         game.batch.end();
 
         game.textBatch.begin();
-        game.bigFont.draw(game.textBatch, "The   Mighty   Tale\nThat   Features\nDELZA", 30, 420);
+        game.bigFont.draw(game.textBatch,"ENHORABONA!", 100, 480 - 60);
+        game.smallFont.draw(game.textBatch,"Enemic   derrotat!", 120, 480 - 420);
         game.textBatch.end();
 
-        mainMenu.render(game.batch, game.textBatch);
+        winMenu.render(game.batch, game.textBatch);
 
-        if (mainMenu.consumeRelease("Start"))
+
+        if(winMenu.consumeRelease("Menu"))
         {
-            game.setScreen(new GameScreen(game));
             this.dispose();
+            game.setScreen(new MainMenuScreen(game));
         }
     }
+
 
     @Override
     public void resize(int width, int height) {
