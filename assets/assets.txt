@@ -80,6 +80,8 @@ character/run/char_run_up(5).png
 character/run/char_run_up(6).png
 gui/A_off.png
 gui/A_on.png
+gui/Button-off.png
+gui/Button-on.png
 gui/Down_off.png
 gui/Down_on.png
 gui/Left_off.png
@@ -88,7 +90,10 @@ gui/Right_off.png
 gui/Right_on.png
 gui/Up_off.png
 gui/Up_on.png
+gui/health_bar_hud.png
+gui/health_hud.png
 joypad.json
+mainmenu.json
 tiles/0.png
 tiles/1.png
 uncompleted/Top_Down_Adventure_Pack_v.1.0/Char_Sprites/char_attack_down_anim.gif

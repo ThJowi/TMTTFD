@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Json;
@@ -15,6 +16,7 @@ public class GameScreen implements Screen {
 
     TMTTFD game;
     ButtonLayout joypad;
+
 
     Stage stage;
     TileMap tileMap;
@@ -62,6 +64,10 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
+        float percent = player.getLive() / 6f;
+        Texture bar = game.manager.get("gui/health_bar_hud.png", Texture.class);
+        Texture health = game.manager.get("gui/health_hud.png", Texture.class);
+
         game.camera.update();
         game.batch.setProjectionMatrix(game.camera.combined);
         game.shapeRenderer.setProjectionMatrix(game.camera.combined);
@@ -78,6 +84,9 @@ public class GameScreen implements Screen {
 
         slime.act(delta);
         game.batch.begin();
+        game.batch.draw(health, 71, 400,
+       117 * percent, health.getHeight()*3);
+        game.batch.draw(bar, 20, 400, bar.getWidth()*3, bar.getHeight()*3);
         slime.draw(game.batch, 1f);
         game.batch.end();
         joypad.render(game.batch, game.textBatch);
@@ -104,9 +113,15 @@ public class GameScreen implements Screen {
             Rectangle rect_player = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getHeight());
             Rectangle rect_enemy = new Rectangle(slime.getX(), slime.getY(), slime.getWidth(), slime.getHeight());
 
-            if (rect_player.overlaps(rect_enemy)){
-                player.reciveHit();
-            }
+            if (rect_player.overlaps(rect_enemy) && !player.attack)
+                player.reciveHit(slime.getX(), slime.getY());
+            if (player.attack && rect_player.overlaps(rect_enemy))
+                slime.reciveHit(player.getX(), player.getY());
+
+
+        }else if (player.isDead()){
+
+        }else if (slime.isDead()){
 
         }
     }

@@ -30,6 +30,13 @@ public class LoadingScreen implements Screen {
         manager.load("gui/Right_on.png", Texture.class);
         manager.load("gui/A_off.png", Texture.class);
         manager.load("gui/A_on.png", Texture.class);
+        manager.load("gui/Button-on.png", Texture.class);
+        manager.load("gui/Button-off.png", Texture.class);
+
+        //Vida del jugador
+        manager.load("gui/health_bar_hud.png", Texture.class);
+        manager.load("gui/health_hud.png", Texture.class);
+
 
         //Player
         for (int i = 0; i < 6; i++){
@@ -92,7 +99,7 @@ public class LoadingScreen implements Screen {
         // Update step ====================================
         if(game.manager.update())
         {
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new MainMenuScreen(game));
             this.dispose();
         }
     }

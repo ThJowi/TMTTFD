@@ -4,7 +4,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player extends WalkingCharacter {
@@ -21,8 +20,11 @@ public class Player extends WalkingCharacter {
     float animationFrame = 0;
 
     String direction;
-    Boolean idle = true;
-    Boolean attack = false;
+    boolean idle = true;
+    boolean attack = false;
+    boolean canAttack = true;
+    final static float ATTACK_COOLDOWN = 3f;
+    float attackTimer = 0f;
 
     public Player(int initialLives, AssetManager manager) {
         super(initialLives, 1.5f);
@@ -54,6 +56,7 @@ public class Player extends WalkingCharacter {
             if (animationFrame >= 6.f) {
                 animationFrame -= 6.f;
                 attack = false;
+                canAttack = false;
             }
             String aDirection = "";
             switch (direction){
@@ -90,7 +93,7 @@ public class Player extends WalkingCharacter {
                 speed.x = SPEED;
                 direction = "right";
                 idle = false;
-            } else if (joypad.isPressed("Attack")){
+            } else if (joypad.isPressed("Attack") && canAttack){
                 speed.x = 0;
                 speed.y = 0;
                 idle = false;
@@ -98,8 +101,15 @@ public class Player extends WalkingCharacter {
                 animationFrame = 0f;
             }
 
+            if (!canAttack){
+                if (attackTimer < ATTACK_COOLDOWN) attackTimer += delta*10;
+                else {
+                    attackTimer = 0;
+                    canAttack = true;
+                }
+            }
 
-            switch (direction) {
+        switch (direction) {
                 case "up":
                     if (idle){
                         if (animationFrame >= 10.f) animationFrame -= 10.f;

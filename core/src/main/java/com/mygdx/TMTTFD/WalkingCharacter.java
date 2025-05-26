@@ -2,6 +2,7 @@ package com.mygdx.TMTTFD;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 public class WalkingCharacter extends GameEntity {
 
@@ -77,10 +78,21 @@ public class WalkingCharacter extends GameEntity {
         shapes.end();
     }
 
-    public void reciveHit() {
+    public void reciveHit(float sourceX, float sourceY) {
         if (!hit && !dead) {
             lives--;
             hit = true;
+
+            float dx = getX() - sourceX;
+            float dy = getY() - sourceY;
+
+            if (dx > dy) dx = 0;
+            else dy = 0;
+
+            Vector2 knockback = new Vector2(dx, dy).nor().scl(1000f);
+
+            speed.set(knockback);
+
             if (lives <= 0) kill();
         }
     }

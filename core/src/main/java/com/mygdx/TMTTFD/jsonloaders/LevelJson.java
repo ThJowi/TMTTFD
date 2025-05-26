@@ -8,10 +8,6 @@ public class LevelJson
     private int mapHeight;
 
     private byte tileMap[][];
-
-    private ArrayList<EnemyJson> enemies;
-    private ArrayList<CollectableJson> collectables;
-
     public LevelJson()
     {
     }
@@ -22,7 +18,6 @@ public class LevelJson
         this.mapHeight = mapHeight;
         this.tileMap = tileMap;
 
-        enemies = new ArrayList<>();
     }
 
     public int getMapWidth() {
@@ -47,27 +42,6 @@ public class LevelJson
 
     public void setTileMap(byte[][] tileMap) {
         this.tileMap = tileMap;
-    }
-
-    public ArrayList<EnemyJson> getEnemies() {
-        return enemies;
-    }
-
-    public void setEnemies(ArrayList<EnemyJson> enemies) {
-        this.enemies = enemies;
-    }
-
-    public void addEnemy(EnemyJson e)
-    {
-        enemies.add(e);
-    }
-
-    public ArrayList<CollectableJson> getCollectables() {
-        return collectables;
-    }
-
-    public void setCollectables(ArrayList<CollectableJson> collectables) {
-        this.collectables = collectables;
     }
 
 }
