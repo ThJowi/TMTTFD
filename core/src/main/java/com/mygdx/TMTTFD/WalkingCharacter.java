@@ -52,7 +52,7 @@ public class WalkingCharacter extends GameEntity {
             speed.y = 0;
         }
 
-        if (hit){
+        if (hit && !dead){
            timer += delta;
            blinkTimer += delta;
 

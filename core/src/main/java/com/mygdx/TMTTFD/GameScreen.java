@@ -17,12 +17,12 @@ public class GameScreen implements Screen {
     TMTTFD game;
     ButtonLayout joypad;
 
-
     Stage stage;
     TileMap tileMap;
 
     Player player;
     Slime slime;
+    boolean resetAnimations;
 
     final static float END_TIME = 12f;
     float timer = 0f;
@@ -41,9 +41,9 @@ public class GameScreen implements Screen {
         player.setJoypad(joypad);
         stage.addActor(player);
         player.setPosition(400, 240); // Posición visible y centrada
-        slime = new Slime(player, 6, 0f, game.manager);
+        slime = new Slime(player, 6, 2f, game.manager);
         slime.setMap(tileMap);
-        slime.setPosition(400, 700);
+        slime.setPosition(400, 550);
         slime.setSize(48, 48);
         Viewport viewport = new Viewport() {
         };
@@ -57,6 +57,7 @@ public class GameScreen implements Screen {
         LevelJson l = json.fromJson(LevelJson.class, scores);
         tileMap.loadFromLevel(l);
 
+        resetAnimations = true;
     }
 
     @Override
@@ -97,7 +98,7 @@ public class GameScreen implements Screen {
         updateGameLogic(delta);
     }
 
-    void updateGameLogic(float delta){
+    void updateGameLogic(float delta) {
 
         stage.act(delta);
 
@@ -121,20 +122,28 @@ public class GameScreen implements Screen {
         if (player.attack && rect_player.overlaps(rect_enemy))
             slime.reciveHit(player.getX(), player.getY());
 
-        if (player.isDead()){
-            slime.speed.set(0,0);
+        if (player.isDead()) {
+            slime.speed.set(0, 0);
             timer += delta * 10;
-            if (timer > END_TIME){
+            if (resetAnimations){
+                player.animationFrame = 0f;
+                resetAnimations = false;
+            }
+            if (timer > END_TIME) {
                 game.setScreen(new MainMenuScreen(game));
                 this.dispose();
             }
-        }else if (slime.isDead()){
+        } else if (slime.isDead()) {
+            player.speed.set(0,0);
             timer += delta * 10;
+            if (resetAnimations){
+                slime.animationFrame = 0f;
+                resetAnimations = false;
+            }
             if (timer > END_TIME) {
                 game.setScreen(new WinScreen(game));
                 this.dispose();
             }
-
         }
     }
 

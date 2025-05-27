@@ -24,6 +24,7 @@ public class Slime extends WalkingCharacter{
     @Override
     public void act(float delta){
 
+        super.act(delta);
         if (dead){
 
             animationFrame += 10f * delta;
@@ -34,9 +35,9 @@ public class Slime extends WalkingCharacter{
             speed.x = 0f;
             speed.y = 0f;
         }
-        super.act(delta);
+
         float distanceY = target.getY() - getY();
-       float distanceX = target.getX() - getX();
+        float distanceX = target.getX() - getX();
 
         if (Math.abs(distanceY) > Math.abs(distanceX)){
             speed.x = 0;
@@ -54,6 +55,7 @@ public class Slime extends WalkingCharacter{
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        if (!visible) return;
         super.draw(batch, parentAlpha);
 
         if (currentFrame != null) {
